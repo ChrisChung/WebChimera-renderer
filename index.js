@@ -152,7 +152,7 @@ function resizeCanvasToDisplaySize(canvas,width, height,fillMode) {
     if (needResize) {
         if(!fillMode){
             var aspect = height / width;
-            displayHeight = Math.ceil(aspect*displayHeight);
+            displayHeight = Math.ceil(aspect*displayWidth);
         }           
         // Make the canvas the same size
         canvas.width  = displayWidth;
