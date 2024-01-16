@@ -7,7 +7,7 @@ Renderer for WebChimera.js
 ### Install
 
 ``
-npm install wcjs-renderer
+npm install webchimera-renderer
 ``
 
 ### Usage example
