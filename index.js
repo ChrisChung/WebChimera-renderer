@@ -134,7 +134,37 @@ function setupCanvas(canvas, vlc, options) {
     gl.v.bind(2, program, "VTexture");
 }
 
-function frameSetup(canvas, width, height, pixelFormat) {
+/***
+ * resize canvas to display size 
+ * filMode true fill full screen without keep aspect
+ */
+function resizeCanvasToDisplaySize(canvas,width, height,fillMode) {
+    var realToCSSPixels = window.devicePixelRatio;
+
+    var gl = canvas.gl;
+    var displayWidth  = Math.floor(gl.canvas.clientWidth  * realToCSSPixels);
+    var displayHeight = Math.floor(gl.canvas.clientHeight * realToCSSPixels);
+
+    // Check if the canvas is not the same size.
+    const needResize = canvas.width  !== displayWidth ||
+                       canvas.height !== displayHeight;
+
+    if (needResize) {
+        if(!fillMode){
+            var aspect = height / width;
+            displayHeight = Math.ceil(aspect*displayHeight);
+        }           
+        // Make the canvas the same size
+        canvas.width  = displayWidth;
+        canvas.height = displayHeight;
+        //resize the style of canvas to keep the aspect
+        canvas.style.setProperty('height', displayHeight, 'important');
+    }
+
+    return needResize;
+}
+
+function frameSetup(canvas, width, height, options) {
     var gl = canvas.gl;
     canvas.width = width;
     canvas.height = height;
@@ -142,6 +172,11 @@ function frameSetup(canvas, width, height, pixelFormat) {
         canvas.img = canvas.ctx.createImageData(width, height);
         return;
     }
+    var fillMode = true;
+    if (options.fillMode){
+        fillMode = false;
+    }
+    resizeCanvasToDisplaySize(canvas,width, height,fillMode);
     gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
 }
 
@@ -157,7 +192,7 @@ module.exports = {
 
         vlc.onFrameSetup =
             function(width, height, pixelFormat) {
-                frameSetup(canvas, width, height, pixelFormat);
+                frameSetup(canvas, width, height, options);
                 typeof options.onFrameSetup === "function" && options.onFrameSetup(width, height, pixelFormat);
 
                 var draw = function() {

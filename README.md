@@ -18,7 +18,7 @@ HTML:
 ```
 JS:
 ```JavaScript
-var renderer = require("wcjs-renderer");
+var renderer = require("webchimera-renderer");
 var vlc = require("wcjs-prebuilt").createPlayer();
 var options = { /* Add renderer options here */ }
 renderer.bind(document.getElementById("canvas"), vlc, options);
@@ -33,6 +33,7 @@ vlc.play("http://archive.org/download/CartoonClassics/Krazy_Kat_-_Keeping_Up_Wit
     - `options`:
         - `fallbackRenderer` is a boolean mentioning if the fallback non-WebGL renderer should be used (optional, defaults to false),
         - `preserveDrawingBuffer` is a boolean mentioning if we should preserve the drawing buffer (optional, defaults to false),
+        - `fileMode` is a boolean mentioning if we should fill canvas without re (optional, defaults to false),
         - `onFrameSetup` will be called when VLC's `onFrameSetup` callback is called, with the same arguments, after the canvas has been setup.
         - `onFrameReady` will be called when VLC's `onFrameReady` callback is called, with the same arguments, after the frame has been rendered to the canvas.
         - `onFrameCleanup` will be called when VLC's `onFrameCleanup` callback is called, with the same arguments, after the frame was cleaned up.

@@ -1,9 +1,9 @@
 {
-    "name": "wcjs-renderer",
+    "name": "webchimera-renderer",
     "description": "renderer for WebChimera.js",
-    "version": "1.0.2",
+    "version": "1.0.0",
     "license": "MIT",
-    "author": "Sergey Radionov <rsatom@gmail.com>",
+    "author": "Chris Chung <zhongyanpei@gmail.com>",
     "keywords": [
         "video",
         "renderer",
@@ -14,6 +14,6 @@
     ],
     "repository": {
         "type": "git",
-        "url": "https://github.com/Magics-Group/wcjs-renderer"
+        "url": "https://github.com/ChrisChung/WebChimera-renderer"
     }
 }
